@@ -5,35 +5,40 @@
 @layer base {
   *, *::before, *::after { box-sizing: border-box; }
   html { -webkit-font-smoothing: antialiased; }
-  body { @apply bg-canvas font-sans text-ink text-base; margin: 0; }
+  body {
+    @apply bg-canvas font-sans text-ink text-base;
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
 }
 
 @layer components {
   .kpi-card {
-    @apply bg-surface border border-border rounded-lg p-4 shadow-card
-           transition-all duration-150 cursor-pointer
-           hover:shadow-lift hover:border-brand/30 hover:-translate-y-px;
+    @apply bg-surface border border-border p-4 transition-all duration-150 cursor-pointer;
+    border-radius: 4px;
+    box-shadow: 0 1.6px 3.6px rgba(0,0,0,0.13), 0 0.3px 0.9px rgba(0,0,0,0.1);
+  }
+  .kpi-card:hover {
+    box-shadow: 0 3.2px 7.2px rgba(0,0,0,0.18), 0 0.6px 1.8px rgba(0,0,0,0.12);
   }
   .kpi-card.active {
-    @apply border-brand/60 shadow-lift;
+    @apply border-l-2 bg-brand-subtle;
+    border-left-color: #118DFF;
   }
   .badge {
-    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium;
+    @apply inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium;
+    border-radius: 2px;
   }
   .badge-positive { @apply bg-positive-bg text-positive; }
   .badge-negative { @apply bg-negative-bg text-negative; }
   .badge-neutral  { @apply bg-neutral-bg  text-neutral;  }
   .data-table { @apply w-full text-sm border-collapse; }
   .data-table th {
-    @apply text-xs font-medium text-ink-tertiary text-left
-           py-2.5 px-4 border-b border-border bg-canvas sticky top-0;
+    @apply text-xs font-medium text-ink-tertiary text-left uppercase tracking-wide
+           py-2 px-3 border-b border-border bg-canvas sticky top-0;
+    letter-spacing: 0.05em;
   }
-  .data-table td { @apply py-2.5 px-4 border-b border-border/60 text-ink-secondary; }
-  .data-table tr:hover td { @apply bg-brand-subtle/50; }
-  .nav-item {
-    @apply flex items-center gap-3 px-3 py-2 rounded text-sm text-ink-secondary
-           transition-colors duration-100 cursor-pointer
-           hover:bg-brand-subtle hover:text-brand;
-  }
-  .nav-item.active { @apply bg-brand-subtle text-brand font-medium; }
+  .data-table td { @apply py-2 px-3 text-ink-secondary; }
+  .data-table tbody tr:nth-child(even) td { @apply bg-canvas; }
+  .data-table tbody tr:hover td { @apply bg-brand-subtle; }
 }
