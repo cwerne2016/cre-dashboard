@@ -2,8 +2,8 @@
 // Power BI palette: #118DFF accent, #E0DDD9 track/bg
 
 const W = 260
-const H = 90
-const BASE = H - 10
+const H = 120
+const BASE = H - 22
 
 function ChartBase({ children, height = H }) {
   return (
@@ -34,15 +34,15 @@ export function GroupedBarChart({ color = '#118DFF', labels = [], thisYear = [],
           <g key={i}>
             <rect x={cx - barW - gap / 2} y={BASE - lyH} width={barW} height={lyH} rx="2" fill={color} opacity=".25" />
             <rect x={cx + gap / 2} y={BASE - tyH} width={barW} height={tyH} rx="2" fill={color} opacity=".8" />
-            <text x={cx} y={H - 1} textAnchor="middle" fontSize="7" fill="#8A8886" fontFamily="'Segoe UI', system-ui, sans-serif">{lbl}</text>
+            <text x={cx} y={H - 1} textAnchor="middle" fontSize="10" fill="#8A8886" fontFamily="'Segoe UI', system-ui, sans-serif">{lbl}</text>
           </g>
         )
       })}
       <g>
         <rect x={W - 70} y={4} width={8} height={6} rx="1" fill={color} opacity=".25" />
-        <text x={W - 59} y={9} fontSize="7" fill="#8A8886" fontFamily="'Segoe UI', system-ui, sans-serif" dominantBaseline="central">Prior yr</text>
+        <text x={W - 59} y={9} fontSize="10" fill="#8A8886" fontFamily="'Segoe UI', system-ui, sans-serif" dominantBaseline="central">Prior yr</text>
         <rect x={W - 28} y={4} width={8} height={6} rx="1" fill={color} opacity=".8" />
-        <text x={W - 17} y={9} fontSize="7" fill="#8A8886" fontFamily="'Segoe UI', system-ui, sans-serif" dominantBaseline="central">TY</text>
+        <text x={W - 17} y={9} fontSize="10" fill="#8A8886" fontFamily="'Segoe UI', system-ui, sans-serif" dominantBaseline="central">TY</text>
       </g>
     </ChartBase>
   )
@@ -88,7 +88,7 @@ export function ProgressBarChart({ color = '#118DFF', colorBg = '#E0DDD9', pct =
   )
 }
 
-export function LineChart({ color = '#118DFF', thisYear = [], lastYear = [], labels = [] }) {
+export function LineChart({ color = '#118DFF', thisYear = [], lastYear = [], labels = [], fill = false }) {
   const all = [...thisYear, ...lastYear].filter(Boolean)
   const max = Math.max(...all, 1)
   const min = Math.min(...all, 0)
@@ -99,14 +99,22 @@ export function LineChart({ color = '#118DFF', thisYear = [], lastYear = [], lab
 
   const tyPoints = thisYear.map((v, i) => `${20 + i * xStep},${scaleY(v)}`).join(' ')
   const lyPoints = lastYear.length ? lastYear.map((v, i) => `${20 + i * xStep},${scaleY(v)}`).join(' ') : null
+  const firstX = 20
+  const lastX = 20 + (n - 1) * xStep
+  const areaPoints = [
+    `${firstX},${BASE}`,
+    ...thisYear.map((v, i) => `${20 + i * xStep},${scaleY(v)}`),
+    `${lastX},${BASE}`,
+  ].join(' ')
 
   return (
     <ChartBase>
+      {fill && <polygon points={areaPoints} fill={color} opacity="0.12" />}
       {lyPoints && <polyline points={lyPoints} fill="none" stroke={color} strokeWidth="1.2" strokeDasharray="4 3" opacity=".4" strokeLinecap="round" strokeLinejoin="round" />}
       <polyline points={tyPoints} fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       {thisYear.map((v, i) => <circle key={i} cx={20 + i * xStep} cy={scaleY(v)} r={i === thisYear.length - 1 ? 3.5 : 2.5} fill={color} />)}
       {labels.map((lbl, i) => (
-        <text key={i} x={20 + i * xStep} y={H - 1} textAnchor="middle" fontSize="7" fill="#8A8886" fontFamily="'Segoe UI', system-ui, sans-serif">{lbl}</text>
+        <text key={i} x={20 + i * xStep} y={H - 1} textAnchor="middle" fontSize="10" fill="#8A8886" fontFamily="'Segoe UI', system-ui, sans-serif">{lbl}</text>
       ))}
     </ChartBase>
   )
@@ -130,14 +138,14 @@ export function StackedBarChart({ colorA = '#118DFF', colorB = '#71C6FF', labels
           <g key={i}>
             <rect x={cx - barW / 2} y={BASE - hA - hB} width={barW} height={hB} rx="2" fill={colorB} opacity=".8" />
             <rect x={cx - barW / 2} y={BASE - hA} width={barW} height={hA} rx="0" fill={colorA} opacity=".8" />
-            <text x={cx} y={H - 1} textAnchor="middle" fontSize="7" fill="#8A8886" fontFamily="'Segoe UI', system-ui, sans-serif">{lbl}</text>
+            <text x={cx} y={H - 1} textAnchor="middle" fontSize="10" fill="#8A8886" fontFamily="'Segoe UI', system-ui, sans-serif">{lbl}</text>
           </g>
         )
       })}
       <rect x={W - 100} y={4} width={8} height={6} rx="1" fill={colorA} opacity=".8" />
-      <text x={W - 89} y={9} fontSize="7" fill="#8A8886" fontFamily="'Segoe UI', system-ui, sans-serif" dominantBaseline="central">{labelsA}</text>
+      <text x={W - 89} y={9} fontSize="10" fill="#8A8886" fontFamily="'Segoe UI', system-ui, sans-serif" dominantBaseline="central">{labelsA}</text>
       <rect x={W - 42} y={4} width={8} height={6} rx="1" fill={colorB} opacity=".8" />
-      <text x={W - 31} y={9} fontSize="7" fill="#8A8886" fontFamily="'Segoe UI', system-ui, sans-serif" dominantBaseline="central">{labelsB}</text>
+      <text x={W - 31} y={9} fontSize="10" fill="#8A8886" fontFamily="'Segoe UI', system-ui, sans-serif" dominantBaseline="central">{labelsB}</text>
     </ChartBase>
   )
 }
@@ -152,8 +160,8 @@ export function BarTargetChart({ color = '#118DFF', values = [], target = 0, lab
 
   return (
     <ChartBase>
-      <line x1="0" y1={targetY} x2={W} y2={targetY} stroke="#A80000" strokeWidth="1" strokeDasharray="4 3" />
-      <text x={W - 2} y={targetY - 3} textAnchor="end" fontSize="7" fill="#A80000" fontFamily="'Segoe UI', system-ui, sans-serif">target</text>
+      <line x1="0" y1={targetY} x2={W} y2={targetY} stroke="#A80000" strokeWidth="1.2" strokeDasharray="4 3" />
+      <text x={W - 2} y={targetY - 4} textAnchor="end" fontSize="10" fill="#A80000" fontFamily="'Segoe UI', system-ui, sans-serif">target</text>
       {labels.map((lbl, i) => {
         const cx = slotW * i + slotW / 2
         const bh = (values[i] / max) * maxH
@@ -161,7 +169,7 @@ export function BarTargetChart({ color = '#118DFF', values = [], target = 0, lab
         return (
           <g key={i}>
             <rect x={cx - barW / 2} y={BASE - bh} width={barW} height={bh} rx="2" fill={color} opacity={above ? 0.8 : 0.5} />
-            <text x={cx} y={H - 1} textAnchor="middle" fontSize="7" fill="#8A8886" fontFamily="'Segoe UI', system-ui, sans-serif">{lbl}</text>
+            <text x={cx} y={H - 1} textAnchor="middle" fontSize="10" fill="#8A8886" fontFamily="'Segoe UI', system-ui, sans-serif">{lbl}</text>
           </g>
         )
       })}
@@ -182,6 +190,51 @@ export function BulletChart({ color = '#118DFF', value = 0, max = 0, floor = 0, 
       <text x={floorX} y="66" textAnchor="middle" fontSize="8" fill="#A80000" fontFamily="'Segoe UI', system-ui, sans-serif">floor</text>
       <text x={valueX + 4} y="47" fontSize="9" fill={color} fontFamily="'Segoe UI', system-ui, sans-serif" dominantBaseline="central" fontWeight="500">{value}x</text>
       <text x="0" y="80" fontSize="9" fill="#8A8886" fontFamily="'Segoe UI', system-ui, sans-serif">{label}</text>
+    </svg>
+  )
+}
+
+export function MiniDonutChart({ valueA, valueB, colorA = '#118DFF', colorB = '#E0DDD9', size = 60 }) {
+  const total = valueA + valueB
+  const fracA = total > 0 ? valueA / total : 0
+  const r = (size / 2) * 0.62
+  const cx = size / 2
+  const cy = size / 2
+  const sw = size * 0.22
+  const circ = 2 * Math.PI * r
+
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      {/* Background ring */}
+      <circle
+        cx={cx} cy={cy} r={r}
+        fill="none"
+        stroke={colorB}
+        strokeWidth={sw}
+        strokeDasharray={`${circ} ${circ}`}
+        transform={`rotate(-90 ${cx} ${cy})`}
+      />
+      {/* Foreground segment */}
+      <circle
+        cx={cx} cy={cy} r={r}
+        fill="none"
+        stroke={colorA}
+        strokeWidth={sw}
+        strokeDasharray={`${fracA * circ} ${circ}`}
+        transform={`rotate(-90 ${cx} ${cy})`}
+      />
+      {/* Center label */}
+      <text
+        x={cx} y={cy}
+        textAnchor="middle"
+        dominantBaseline="central"
+        fontSize={size * 0.18}
+        fontWeight="700"
+        fill="#252423"
+        fontFamily="'Segoe UI', system-ui, sans-serif"
+      >
+        {Math.round(fracA * 100)}%
+      </text>
     </svg>
   )
 }
