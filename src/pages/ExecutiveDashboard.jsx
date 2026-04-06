@@ -65,7 +65,7 @@ function ChangeBadge({ change, trend }) {
 function SectionLabel({ children }) {
   return (
     <div style={{
-      fontSize: 36, fontWeight: 700, color: '#252423',
+      fontSize: 27, fontWeight: 700, color: '#252423',
       marginBottom: 18, textAlign: 'center',
       letterSpacing: '0.01em',
     }}>
@@ -94,7 +94,7 @@ function CardHeader({ label, active }) {
       minHeight: 64,
     }}>
       <span style={{
-        fontSize: 26, fontWeight: 700, color: '#FFFFFF',
+        fontSize: 20, fontWeight: 700, color: '#FFFFFF',
         letterSpacing: '0.04em', textTransform: 'uppercase',
         whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
       }}>
@@ -268,13 +268,13 @@ function FilterBar({ period, onPeriod }) {
       padding: '0 28px', flexShrink: 0,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-        <span style={{ fontSize: 42, color: '#605E5C', fontWeight: 600 }}>Period:</span>
+        <span style={{ fontSize: 32, color: '#605E5C', fontWeight: 600 }}>Period:</span>
         {['Month', 'QTD', 'YTD'].map((p) => (
           <button
             key={p}
             onClick={() => onPeriod(p)}
             style={{
-              fontSize: 39, fontWeight: 600, padding: '6px 22px', borderRadius: 14,
+              fontSize: 29, fontWeight: 600, padding: '6px 22px', borderRadius: 14,
               border: period === p ? 'none' : '2px solid #E0DDD9',
               background: period === p ? '#118DFF' : 'transparent',
               color: period === p ? '#FFFFFF' : '#605E5C',
