@@ -18,7 +18,7 @@ export function AppHeader() {
 
       {/* Center: brand — absolutely centered */}
       <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center' }}>
-        <span style={{ color: '#FFFFFF', fontSize: 51, fontWeight: 700, letterSpacing: '0.01em', lineHeight: 1 }}>
+        <span style={{ color: '#FFFFFF', fontSize: 38, fontWeight: 700, letterSpacing: '0.01em', lineHeight: 1 }}>
           RE Group
         </span>
       </div>
@@ -77,7 +77,7 @@ export function TabBar() {
               gap: 8,
               height: isActive ? 66 : 60,
               padding: '0 28px',
-              fontSize: 39,
+              fontSize: 29,
               fontWeight: isActive ? 700 : 500,
               color: isActive ? '#1B3A5C' : '#605E5C',
               textDecoration: 'none',
