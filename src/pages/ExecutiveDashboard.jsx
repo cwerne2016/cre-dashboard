@@ -65,8 +65,8 @@ function ChangeBadge({ change, trend }) {
 function SectionLabel({ children }) {
   return (
     <div style={{
-      fontSize: 18, fontWeight: 700, color: '#252423',
-      marginBottom: 14, textAlign: 'center',
+      fontSize: 36, fontWeight: 700, color: '#252423',
+      marginBottom: 18, textAlign: 'center',
       letterSpacing: '0.01em',
     }}>
       {children}
@@ -87,15 +87,15 @@ const sectionContainerStyle = {
 function CardHeader({ label, active }) {
   return (
     <div style={{
-      padding: '10px 14px',
+      padding: '14px 18px',
       display: 'flex', alignItems: 'center',
       background: active ? '#0F2B47' : '#1B3A5C',
       transition: 'background 0.15s',
-      minHeight: 46,
+      minHeight: 64,
     }}>
       <span style={{
-        fontSize: 13, fontWeight: 700, color: '#FFFFFF',
-        letterSpacing: '0.06em', textTransform: 'uppercase',
+        fontSize: 26, fontWeight: 700, color: '#FFFFFF',
+        letterSpacing: '0.04em', textTransform: 'uppercase',
         whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
       }}>
         {label}
@@ -263,36 +263,36 @@ function TalentCard({ kpi, active, onClick }) {
 function FilterBar({ period, onPeriod }) {
   return (
     <div style={{
-      height: 50, background: '#FFFFFF', borderBottom: '1px solid #E0DDD9',
+      height: 80, background: '#FFFFFF', borderBottom: '1px solid #E0DDD9',
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-      padding: '0 24px', flexShrink: 0,
+      padding: '0 28px', flexShrink: 0,
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-        <span style={{ fontSize: 14, color: '#605E5C', fontWeight: 500 }}>Period:</span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+        <span style={{ fontSize: 42, color: '#605E5C', fontWeight: 600 }}>Period:</span>
         {['Month', 'QTD', 'YTD'].map((p) => (
           <button
             key={p}
             onClick={() => onPeriod(p)}
             style={{
-              fontSize: 13, fontWeight: 500, padding: '4px 14px', borderRadius: 12,
-              border: period === p ? 'none' : '1px solid #E0DDD9',
+              fontSize: 39, fontWeight: 600, padding: '6px 22px', borderRadius: 14,
+              border: period === p ? 'none' : '2px solid #E0DDD9',
               background: period === p ? '#118DFF' : 'transparent',
               color: period === p ? '#FFFFFF' : '#605E5C',
-              cursor: 'pointer', transition: 'all 0.1s',
+              cursor: 'pointer', transition: 'all 0.1s', lineHeight: 1.2,
             }}
           >
             {p}
           </button>
         ))}
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-        <svg width="14" height="14" viewBox="0 0 13 13" fill="none">
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <svg width="22" height="22" viewBox="0 0 13 13" fill="none">
           <rect x="1" y="2" width="11" height="10" rx="1.5" stroke="#8A8886" strokeWidth="1.2" fill="none" />
           <line x1="1" y1="5" x2="12" y2="5" stroke="#8A8886" strokeWidth="1.2" />
           <line x1="4" y1="1" x2="4" y2="3.5" stroke="#8A8886" strokeWidth="1.2" strokeLinecap="round" />
           <line x1="9" y1="1" x2="9" y2="3.5" stroke="#8A8886" strokeWidth="1.2" strokeLinecap="round" />
         </svg>
-        <span style={{ fontSize: 13, color: '#8A8886' }}>As of March 2025</span>
+        <span style={{ fontSize: 18, color: '#8A8886' }}>As of March 2025</span>
       </div>
     </div>
   )
